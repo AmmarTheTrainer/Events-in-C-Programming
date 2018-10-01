@@ -23,20 +23,22 @@ namespace WeatherNotifications
         public delegate void listener(string msg);
         public delegate void listener<T>(T msg);
 
-        private listener Handler;
+        //private listener Handler;
+
+        public event listener GetCricketUpdate;
 
         public delegate void RemoteUpdateDelegate(int statusCode , string message);
 
-        public void SubsribeToCricketUpdates(listener listener)
-        {
-            Handler += listener;
-        }
+        //public void SubsribeToCricketUpdates(listener listener)
+        //{
+        //    Handler += listener;
+        //}
 
-        public void UnSubsribeToCricketUpdates(listener listener)
-        {
-            Handler -= listener;
-            //Delegate.Remove()
-        }
+        //public void UnSubsribeToCricketUpdates(listener listener)
+        //{
+        //    Handler -= listener;
+        //    //Delegate.Remove()
+        //}
 
         public void StartInningsOver(int overNo)
         {
@@ -48,7 +50,8 @@ namespace WeatherNotifications
                 }
                 else
                 {
-                    Handler.Invoke(" Match is about to finish ");
+                    GetCricketUpdate(" ---- ");
+                    //Handler.Invoke(" Match is about to finish ");
                 }
             }
             else
