@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,8 +25,11 @@ namespace WeatherNotifications
             //Console.WriteLine("\n unsubscribtion done.. \n");
             //cricketUpdates.UnSubsribeToCricketUpdates(UpdateUI2);
 
-            cricketUpdates.GetCricketUpdate += UpdatesFORCricket;
-            cricketUpdates.GetCricketUpdate += MycustomUpdates;
+            int a;
+
+            cricketUpdates.GetCricketUpdate += (sender, e) => {  }; 
+            
+            //cricketUpdates.GetCricketUpdate += MycustomUpdates;
 
             cricketUpdates.StartInningsOver(21);
 
@@ -33,6 +37,11 @@ namespace WeatherNotifications
             bsc.CollectionChanged += Bsc_CollectionChanged;
 
             Console.ReadLine();
+        }
+
+        private static void CricketUpdates_GetCricketUpdate(object sender, CricketEventArgs e)
+        {
+            Console.WriteLine(e.message);
         }
 
         private static void Bsc_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)

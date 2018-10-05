@@ -20,12 +20,16 @@ namespace WeatherNotifications
         public int MaximumOvers { get; set; } = 20;
 
        
-        public delegate void listener(string msg);
-        public delegate void listener<T>(T msg);
+        //public delegate void listener(object sender , EventArgs e);
+
+        public delegate void listener(object sender , CricketEventArgs e);
+        public delegate void listenerForMsg(string msg);
+       // public delegate void listener<T>(T msg);
 
         //private listener Handler;
 
         public event listener GetCricketUpdate;
+        public event listenerForMsg GetCricketUpdateMsg;
 
         public delegate void RemoteUpdateDelegate(int statusCode , string message);
 
@@ -34,7 +38,7 @@ namespace WeatherNotifications
         //    Handler += listener;
         //}
 
-        //public void UnSubsribeToCricketUpdates(listener listener)
+        //public void UnSubsribeToCricketUpdates(listener listener) 
         //{
         //    Handler -= listener;
         //    //Delegate.Remove()
@@ -50,13 +54,18 @@ namespace WeatherNotifications
                 }
                 else
                 {
-                    GetCricketUpdate(" ---- ");
-                    //Handler.Invoke(" Match is about to finish ");
+                    //if (GetCricketUpdate != null)
+                    //{
+                    //    GetCricketUpdate(" ---- ");
+
+                    //}
+                    GetCricketUpdateMsg?.Invoke("message from call back");
+                    GetCricketUpdate?.Invoke(this , new CricketEventArgs {  message = "you are out"});
                 }
             }
             else
             {
-                    Handler.Invoke(" Match is over ");
+                    //Handler.Invoke(" Match is over ");
                 
             }
         }
